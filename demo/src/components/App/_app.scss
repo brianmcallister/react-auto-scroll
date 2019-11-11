@@ -46,6 +46,36 @@
     flex: 1;
   }
 
+  &__options {
+    display: flex;
+  }
+
+  &__option-group {
+    display: flex;
+    flex-direction: column;
+    color: map-get($colors, barrow);
+
+    label {
+      @include type-style-queens;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      // cursor: pointer;
+      user-select: none;
+    }
+
+    input {
+      // cursor: pointer;
+      margin-right: 10px;
+
+      &[type=checkbox] {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+
   &__msg-container {
     background: #1D1F21;
     width: 400px;
