@@ -12,6 +12,7 @@
     "@babel/preset-react": "7.7.0",
     "@babel/preset-typescript": "7.7.2",
     "@brianmcallister/highlight-text": "2.0.0-beta.2",
+    "@brianmcallister/react-auto-scroll": "0.1.0-beta.0",
     "@types/faker": "4.1.7",
     "@types/node": "12.7.4",
     "@types/react": "16.8.2",

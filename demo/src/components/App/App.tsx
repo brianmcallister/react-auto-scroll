@@ -1,7 +1,7 @@
+import AutoScroll from '@brianmcallister/react-auto-scroll';
 import faker from 'faker';
 import React from 'react';
 
-import AutoScroll from 'react-auto-scroll';
 import LogoIcon from '../LogoIcon';
 
 import './_app.scss';
