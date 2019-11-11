@@ -1,0 +1,7 @@
+@import '../../styles/base';
+
+.logo-icon {
+  path {
+    fill: map-get($colors, allen);
+  }
+}
