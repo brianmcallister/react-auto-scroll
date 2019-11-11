@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "jsx": "react",
+    "lib": ["es2017", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "pretty": true,
+    "rootDir": "src",
+    "strict": true,
+    "target": "es2017"
+  },
+  "include": ["src/"]
+}
