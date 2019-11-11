@@ -1,23 +1,10 @@
 import faker from 'faker';
 import React from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
-import theme from './theme';
-import HighlightText from '../HighlightText';
-import WordList from '../WordList';
+import AutoScroll from 'react-auto-scroll';
 import LogoIcon from '../LogoIcon';
 
 import './_app.scss';
-
-const CODE_STRING = `import HighlightText from '@brianmcallister/react-highlight-text';
-
-const MyComponent = () => (
-  <HighlightText
-    text="Hello world! I'm highlighted!"
-    words={['world', 'highlighted']}
-  />
-);
-`;
 
 const baseClass = 'app';
 
@@ -40,14 +27,13 @@ export default () => (
     </header>
 
     <div className={`${baseClass}__content`}>
-      <HighlightText
-        text="Hello world! I'm highlighted!"
-        words={['world', 'highlighted']}
-      />
+      hello
 
-      <SyntaxHighlighter className={`${baseClass}__code`} language="javascript" style={theme}>
-        {CODE_STRING}
-      </SyntaxHighlighter>
+      <div className={`${baseClass}__msg-container`}>
+        <AutoScroll>
+          msg
+        </AutoScroll>
+      </div>
     </div>
   </div>
 );

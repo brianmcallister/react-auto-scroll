@@ -46,23 +46,10 @@
     flex: 1;
   }
 
-  &__code {
-    display: inline-block;
-    margin: 0 auto !important;
-    border-radius: 2px !important;
-
-    code {
-      font-size: 16px !important;
-      line-height: 26px !important;
-      font-family: Inconsolata, monospace !important;
-    }
-  }
-
-  .highlight-text {
-    @include type-style-brooklyn;
-
-    color: map-get($colors, ann);
-    margin-bottom: 100px;
-    text-align: center;
+  &__msg-container {
+    background: #1D1F21;
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
   }
 }
