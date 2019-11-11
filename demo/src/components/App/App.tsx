@@ -29,6 +29,32 @@ export default () => (
     <div className={`${baseClass}__content`}>
       hello
 
+      <div className={`${baseClass}__options`}>
+        <div>
+          <input type="checkbox" />
+
+          <label>Prevent interaction</label>
+        </div>
+
+        <div>
+          <input type="checkbox" />
+
+          <label>Show auto scroll option</label>
+        </div>
+
+        <div>
+          <input type="text" />
+
+          <label>Auto scroll text</label>
+        </div>
+
+        <div>
+          <input type="range" />
+
+          <label>Height</label>
+        </div>
+      </div>
+
       <div className={`${baseClass}__msg-container`}>
         <AutoScroll>
           msg
