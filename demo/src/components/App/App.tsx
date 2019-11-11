@@ -1,5 +1,5 @@
 import AutoScroll from '@brianmcallister/react-auto-scroll';
-import faker from 'faker';
+// import faker from 'faker';
 import React from 'react';
 
 import LogoIcon from '../LogoIcon';
@@ -31,9 +31,13 @@ export default () => (
 
       <div className={`${baseClass}__options`}>
         <div>
-          <input type="checkbox" />
 
-          <label>Prevent interaction</label>
+
+          <label>
+            Prevent interaction
+            <input type="checkbox" />
+          </label>
+
         </div>
 
         <div>

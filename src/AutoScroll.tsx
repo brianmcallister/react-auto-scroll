@@ -31,7 +31,7 @@ const baseClass = 'react-auto-scroll';
 const getRandomString = () =>
   Math.random()
     .toString(36)
-    .substring(2, 15);
+    .slice(2, 15);
 
 /**
  * AutoScroll component.
@@ -46,7 +46,7 @@ export default ({
   showOption = true,
 }: Props) => {
   const [autoScroll, setAutoScroll] = React.useState(true);
-  const containerEl = React.useRef<HTMLDivElement>(null);
+  const containerElement = React.useRef<HTMLDivElement>(null);
   const cls = classnames(baseClass, className, {
     [`${baseClass}--empty`]: React.Children.count(children) === 0,
     [`${baseClass}--prevent-interaction`]: preventInteraction,
@@ -61,7 +61,7 @@ export default ({
 
   // Handle mousewheel events on the scroll container.
   const onWheel = () => {
-    const { current } = containerEl;
+    const { current } = containerElement;
 
     if (current && showOption) {
       setAutoScroll(current.scrollTop + current.offsetHeight === current.scrollHeight);
@@ -72,13 +72,13 @@ export default ({
   // so that the initial render is scrolled all the way to the bottom.
   React.useEffect(() => {
     setTimeout(() => {
-      const { current } = containerEl;
+      const { current } = containerElement;
 
       if (current) {
         current.style.scrollBehavior = 'smooth';
       }
     }, 0);
-  }, [containerEl]);
+  }, [containerElement]);
 
   // When the children are updated, scroll the container
   // to the bottom.
@@ -87,19 +87,19 @@ export default ({
       return;
     }
 
-    const { current } = containerEl;
+    const { current } = containerElement;
 
     if (current) {
       current.scrollTop = current.scrollHeight;
     }
-  }, [children, containerEl, autoScroll]);
+  }, [children, containerElement, autoScroll]);
 
   return (
     <div className={cls}>
       <div
         className={`${baseClass}__scroll-container`}
         onWheel={onWheel}
-        ref={containerEl}
+        ref={containerElement}
         style={style}
       >
         {children}
