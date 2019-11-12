@@ -1,6 +1,5 @@
 {
   "name": "react-auto-scroll-demo",
-  "private": true,
   "scripts": {
     "build": "webpack --mode=production",
     "start": "webpack-dev-server --hot"
