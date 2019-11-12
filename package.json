@@ -1,6 +1,6 @@
 {
   "name": "@brianmcallister/react-auto-scroll",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/AutoScroll.js",
   "repository": "brianmcallister/react-auto-scroll",
