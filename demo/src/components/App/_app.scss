@@ -1,10 +1,10 @@
 @import '../../styles/base';
 
 .app {
-  height: 100vh;
+  align-items: stretch;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  height: 100vh;
 
   &__header {
     @include type-style-manhattan;
@@ -14,8 +14,8 @@
     justify-content: flex-end;
     margin: auto;
     padding: 30px;
-    width: 100%;
     position: relative;
+    width: 100%;
     z-index: 1;
   }
 
@@ -38,19 +38,19 @@
   }
 
   &__content {
-    margin: -50px auto 0 auto;
-    max-width: 1200px;
-    padding: 0 50px 50px 50px;
+    align-items: center;
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    flex: 1;
+    margin: -50px auto 0;
+    max-width: 1200px;
+    padding: 0 50px 50px;
   }
 
   &__options {
-    display: flex;
     align-items: baseline;
+    display: flex;
     margin-bottom: 50px;
 
     label {
@@ -69,8 +69,8 @@
     }
 
     .bp3-switch {
-      padding: 0 !important;
       margin: 0 !important;
+      padding: 0 !important;
     }
 
     .bp3-control-indicator {
@@ -91,21 +91,21 @@
   }
 
   &__msg-container {
-    background: #1D1F21;
-    width: 70vw;
+    background: #1d1f21;
     border-radius: 5px;
     padding: 10px 0;
+    width: 70vw;
   }
 
   &__msg {
     color: map-get($colors, beach);
-    font-family: monospace;
-    white-space: nowrap;
-    padding: 5px 12px;
     cursor: default;
+    font-family: monospace;
+    padding: 5px 12px;
+    white-space: nowrap;
 
     &:hover {
-      background-color: lighten(#1D1F21, 2%);
+      background-color: lighten(#1d1f21, 2%);
     }
   }
 
@@ -117,10 +117,10 @@
     &__option {
       @include type-style-manhattan;
 
-      display: inline-block;
-      cursor: pointer;
       color: map-get($colors, barrow);
-      padding: 12px 10px 0 10px;
+      cursor: pointer;
+      display: inline-block;
+      padding: 12px 10px 0;
     }
 
     &__option-input {

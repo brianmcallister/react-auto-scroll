@@ -1,0 +1,77 @@
+version: 2
+
+jobs:
+  lint:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-modules-{{ checksum "package.json" }}
+            - node-modules-
+      - run: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: node-modules-{{ checksum "package.json" }}
+      - run: cd demo && npm ci && cd -
+      - run: npm run lint
+
+  stylelint:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-modules-{{ checksum "package.json" }}
+            - node-modules-
+      - run: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: node-modules-{{ checksum "package.json" }}
+      - run: npm run stylelint
+
+  typescript:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-modules-{{ checksum "package.json" }}
+            - node-modules-
+      - run: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: node-modules-{{ checksum "package.json" }}
+      - run: npm run types
+
+  test:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-modules-{{ checksum "package.json" }}
+            - node-modules-
+      - run: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: node-modules-{{ checksum "package.json" }}
+      - run: npm test -- --coverage
+      - run: bash <(curl -s https://codecov.io/bash) -f ./coverage/coverage-final.json
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - lint
+      - stylelint
+      - typescript
+      - test
