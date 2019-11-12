@@ -15,6 +15,8 @@
     margin: auto;
     padding: 30px;
     width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   &__header-link {
@@ -36,7 +38,7 @@
   }
 
   &__content {
-    margin: 0 auto;
+    margin: -50px auto 0 auto;
     max-width: 1200px;
     padding: 0 50px 50px 50px;
     display: flex;
@@ -48,38 +50,86 @@
 
   &__options {
     display: flex;
-  }
-
-  &__option-group {
-    display: flex;
-    flex-direction: column;
-    color: map-get($colors, barrow);
+    align-items: baseline;
+    margin-bottom: 50px;
 
     label {
-      @include type-style-queens;
+      @include type-style-bronx;
 
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      // cursor: pointer;
+      color: map-get($colors, barrow);
       user-select: none;
     }
+  }
 
-    input {
-      // cursor: pointer;
-      margin-right: 10px;
+  &__option {
+    margin: 0 0 0 50px;
 
-      &[type=checkbox] {
-        width: 25px;
-        height: 25px;
-      }
+    &:first-child {
+      margin-left: 0;
+    }
+
+    .bp3-switch {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .bp3-control-indicator {
+      margin: 0 !important;
+    }
+
+    .bp3-input-group {
+      margin-top: 3px;
+    }
+
+    .bp3-slider {
+      margin-top: 2px;
+    }
+
+    .bp3-slider-axis {
+      display: none;
     }
   }
 
   &__msg-container {
     background: #1D1F21;
-    width: 400px;
-    height: 200px;
-    border-radius: 10px;
+    width: 70vw;
+    border-radius: 5px;
+    padding: 10px 0;
+  }
+
+  &__msg {
+    color: map-get($colors, beach);
+    font-family: monospace;
+    white-space: nowrap;
+    padding: 5px 12px;
+    cursor: default;
+
+    &:hover {
+      background-color: lighten(#1D1F21, 2%);
+    }
+  }
+
+  .react-auto-scroll {
+    &__scroll-container {
+      overflow-x: hidden !important;
+    }
+
+    &__option {
+      @include type-style-manhattan;
+
+      display: inline-block;
+      cursor: pointer;
+      color: map-get($colors, barrow);
+      padding: 12px 10px 0 10px;
+    }
+
+    &__option-input {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    &__option-text {
+      cursor: pointer;
+    }
   }
 }

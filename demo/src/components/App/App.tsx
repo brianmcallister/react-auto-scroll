@@ -1,10 +1,13 @@
 import AutoScroll from '@brianmcallister/react-auto-scroll';
-// import faker from 'faker';
+import faker from 'faker';
 import React from 'react';
+import { Label, FocusStyleManager, Switch, Slider, InputGroup, FormGroup } from '@blueprintjs/core';
 
 import LogoIcon from '../LogoIcon';
 
 import './_app.scss';
+
+FocusStyleManager.onlyShowFocusOnTabs();
 
 const DEFAULT_HEIGHT = 300;
 const baseClass = 'app';
@@ -17,6 +20,28 @@ export default () => {
   const [autoScroll, setAutoScroll] = React.useState(true);
   const [optionText, setOptionText] = React.useState('Auto scroll');
   const [height, setHeight] = React.useState(DEFAULT_HEIGHT);
+  const [messages, setMessages] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (Math.random() > 0.5) {
+        return;
+      }
+
+      const msg = [
+        faker.internet.protocol(),
+        `/${faker.system.commonFileType()}/${faker.system.commonFileName(faker.system.commonFileExt())}`,
+        faker.random.number(),
+        faker.system.mimeType(),
+        faker.system.semver(),
+        faker.random.locale(),
+      ];
+
+      setMessages(messages.concat([msg.join(' ')]));
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [messages]);
 
   return (
     <div className={baseClass}>
@@ -35,54 +60,53 @@ export default () => {
 
       <div className={`${baseClass}__content`}>
         <div className={`${baseClass}__options`}>
-          <div className={`${baseClass}__option-group`}>
-            <label>
-              <input
-                onChange={() => setPreventInteraction(!preventInteraction)}
-                type="checkbox"
-                checked={preventInteraction}
-              />
-
+          <div className={`${baseClass}__option`}>
+            <Label htmlFor="prevent">
               Prevent interaction
-            </label>
+            </Label>
 
-            <label>
-              <input
-                onChange={() => setAutoScroll(!autoScroll)}
-                type="checkbox"
-                checked={autoScroll}
-              />
+            <Switch
+              id="prevent"
+              onChange={() => setPreventInteraction(!preventInteraction)}
+              checked={preventInteraction}
+              large
+              inline
+              alignIndicator="right"
+            />
+          </div>
 
+          <div className={`${baseClass}__option`}>
+            <Label htmlFor="option">
               Show auto scroll option
-            </label>
+            </Label>
+
+            <Switch
+              id="option"
+              onChange={() => setAutoScroll(!autoScroll)}
+              checked={autoScroll}
+              large
+              inline
+              alignIndicator="right"
+            />
           </div>
 
-          <div className={`${baseClass}__option-group`}>
-            <label>
-              <input
-                onChange={(event) => (
-                  setOptionText(event.currentTarget.value)
-                )}
-                type="text"
-                value={optionText}
-              />
+          <FormGroup className={`${baseClass}__option`} label="Option text">
+            <InputGroup
+              value={optionText}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => (
+                setOptionText(event.currentTarget.value)
+              )}
+            />
+          </FormGroup>
 
-              Auto scroll option text
-            </label>
-
-            <label>
-              <input
-                onChange={(event) => (
-                  setHeight(parseInt(event.currentTarget.value, 10))
-                )}
-                min="250"
-                max="400"
-                type="range"
-              />
-
-              Height
-            </label>
-          </div>
+          <FormGroup className={`${baseClass}__option`} label="Height">
+            <Slider
+              onChange={setHeight}
+              min={250}
+              max={400}
+              value={height}
+            />
+          </FormGroup>
         </div>
 
         <div className={`${baseClass}__msg-container`}>
@@ -92,7 +116,13 @@ export default () => {
             optionText={optionText}
             height={height}
           >
-            msg
+            {messages.map(msg => {
+              return (
+                <div key={msg} className={`${baseClass}__msg`}>
+                  {msg}
+                </div>
+              );
+            })}
           </AutoScroll>
         </div>
       </div>

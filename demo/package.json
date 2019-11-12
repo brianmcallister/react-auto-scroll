@@ -11,6 +11,7 @@
     "@babel/preset-env": "7.7.1",
     "@babel/preset-react": "7.7.0",
     "@babel/preset-typescript": "7.7.2",
+    "@blueprintjs/core": "3.19.1",
     "@brianmcallister/highlight-text": "2.0.0-beta.2",
     "@brianmcallister/react-auto-scroll": "latest",
     "@types/faker": "4.1.7",
