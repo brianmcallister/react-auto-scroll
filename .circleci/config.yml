@@ -15,7 +15,6 @@ jobs:
           paths:
             - node_modules
           key: node-modules-{{ checksum "package.json" }}
-      - run: cd demo && npm ci && cd -
       - run: npm run lint
 
   stylelint:
