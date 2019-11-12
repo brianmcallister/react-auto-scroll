@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "",
   "main": "dist/AutoScroll.js",
+  "repository": "brianmcallister/react-auto-scroll",
   "author": {
     "name": "Brian Wm. McAllister",
     "email": "brian@brianmcallister.com",
