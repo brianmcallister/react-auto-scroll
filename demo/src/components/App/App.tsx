@@ -53,8 +53,8 @@ export default () => {
         </a>
 
         <div className={`${baseClass}__header-links`}>
-          <a href="https://github.com/brianmcallister/react-highlight-text">GitHub</a>
-          <a href="https://npmjs.com/package/@brianmcallister/react-highlight-text">npm</a>
+          <a href="https://github.com/brianmcallister/react-auto-scroll">GitHub</a>
+          <a href="https://npmjs.com/package/@brianmcallister/react-auto-scroll">npm</a>
         </div>
       </header>
 
