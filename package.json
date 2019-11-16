@@ -1,9 +1,11 @@
 {
   "name": "@brianmcallister/react-auto-scroll",
   "version": "1.0.2",
-  "description": "",
+  "description": "Automatically scroll an element to the bottom",
   "main": "dist/AutoScroll.js",
   "repository": "brianmcallister/react-auto-scroll",
+  "homepage": "https://react-auto-scroll.netlify.com/",
+  "license": "MIT",
   "author": {
     "name": "Brian Wm. McAllister",
     "email": "brian@brianmcallister.com",
@@ -12,6 +14,11 @@
   "files": [
     "dist/**/*"
   ],
+  "keywords": [
+    "autoscroll",
+    "scroll",
+    "react"
+  ],
   "scripts": {
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore ./src ./demo",
     "prepare": "tsc",
@@ -19,7 +26,12 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "types": "tsc --noEmit"
   },
-  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.8"
+  },
+  "dependencies": {
+    "classnames": "^2"
+  },
   "devDependencies": {
     "@types/classnames": "2.2.9",
     "@types/react": "16.8.0",
@@ -43,11 +55,5 @@
     "stylelint-config-sass-guidelines": "6.1.0",
     "stylelint-scss": "3.12.1",
     "typescript": "3.7.2"
-  },
-  "peerDependencies": {
-    "react": "^16.8.0"
-  },
-  "dependencies": {
-    "classnames": "2.2.6"
   }
 }
