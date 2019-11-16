@@ -30,7 +30,9 @@ export default () => {
 
       const msg = [
         faker.internet.protocol(),
-        `/${faker.system.commonFileType()}/${faker.system.commonFileName(faker.system.commonFileExt())}`,
+        `/${faker.system.commonFileType()}/${faker.system.commonFileName(
+          faker.system.commonFileExt(),
+        )}`,
         faker.random.number(),
         faker.system.mimeType(),
         faker.system.semver(),
@@ -61,9 +63,7 @@ export default () => {
       <div className={`${baseClass}__content`}>
         <div className={`${baseClass}__options`}>
           <div className={`${baseClass}__option`}>
-            <Label htmlFor="prevent">
-              Prevent interaction
-            </Label>
+            <Label htmlFor="prevent">Prevent interaction</Label>
 
             <Switch
               id="prevent"
@@ -76,9 +76,7 @@ export default () => {
           </div>
 
           <div className={`${baseClass}__option`}>
-            <Label htmlFor="option">
-              Show auto scroll option
-            </Label>
+            <Label htmlFor="option">Show auto scroll option</Label>
 
             <Switch
               id="option"
@@ -93,19 +91,14 @@ export default () => {
           <FormGroup className={`${baseClass}__option`} label="Option text">
             <InputGroup
               value={optionText}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => (
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setOptionText(event.currentTarget.value)
-              )}
+              }
             />
           </FormGroup>
 
           <FormGroup className={`${baseClass}__option`} label="Height">
-            <Slider
-              onChange={setHeight}
-              min={250}
-              max={400}
-              value={height}
-            />
+            <Slider onChange={setHeight} min={250} max={400} value={height} />
           </FormGroup>
         </div>
 
@@ -128,4 +121,4 @@ export default () => {
       </div>
     </div>
   );
-}
+};

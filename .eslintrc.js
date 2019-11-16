@@ -4,7 +4,6 @@ module.exports = {
     'eslint-comments',
     'jest',
     'promise',
-    'unicorn',
   ],
   extends: [
     'airbnb-typescript',
@@ -12,8 +11,7 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'plugin:jest/recommended',
     'plugin:promise/recommended',
-    'plugin:unicorn/recommended',
-    'prettier',
+    'plugin:prettier/recommended',
     'prettier/react',
     'prettier/@typescript-eslint',
   ],
@@ -23,10 +21,10 @@ module.exports = {
     jest: true,
   },
   rules: {
-    'unicorn/prevent-abbreviations': 'off',
-    'unicorn/filename-case': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    'jsx-a11y/label-has-associated-control': 'off'
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
+    'react/no-did-update-set-state': 'off',
   },
 }
