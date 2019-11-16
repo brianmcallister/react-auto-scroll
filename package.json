@@ -1,6 +1,6 @@
 {
   "name": "@brianmcallister/react-auto-scroll",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Automatically scroll an element to the bottom",
   "main": "dist/AutoScroll.js",
   "repository": "brianmcallister/react-auto-scroll",
