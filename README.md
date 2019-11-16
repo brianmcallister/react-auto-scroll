@@ -12,7 +12,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [API](#api)
-	- [`highlightText`](#highlighttext)
+	- [`AutoScroll`](#autoscroll)
 
 ## Demo
 
