@@ -1,20 +1,55 @@
 # @brianmcallister/react-auto-scroll
 
-<!-- [![codecov](https://codecov.io/gh/brianmcallister/highlight-text/branch/master/graph/badge.svg)](https://codecov.io/gh/brianmcallister/highlight-text) -->
+[![CircleCI](https://circleci.com/gh/brianmcallister/react-auto-scroll.svg?style=svg)](https://circleci.com/gh/brianmcallister/react-auto-scroll) [![npm version](https://img.shields.io/npm/v/@brianmcallister/react-auto-scroll?label=version&color=%2354C536&logo=npm)](https://www.npmjs.com/package/@brianmcallister/react-auto-scroll)
 
-[![CircleCI](https://circleci.com/gh/brianmcallister/react-auto-scroll.svg?style=svg)](https://circleci.com/gh/brianmcallister/react-auto-scroll) [![npm version](https://badge.fury.io/js/%40brianmcallister%2Freact-auto-scroll.svg)](https://badge.fury.io/js/%40brianmcallister%2Freact-auto-scroll)
+> Automatically scroll an element to the bottom
 
 `react-auto-scroll` is a React component that automatically scrolls a containing element to the bottom.
 
+## Table of contents
+
+- [Demo](#demo)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API](#api)
+	- [`highlightText`](#highlighttext)
+
 ## Demo
 
-Check out the hosted demo right here: [https://react-auto-scroll.netlify.com/](https://react-auto-scroll.netlify.com/)
+Hosted demo: [https://react-auto-scroll.netlify.com/](https://react-auto-scroll.netlify.com/)
+
+You can also run the demo locally. To get started:
+
+```sh
+git clone git@github.com:brianmcallister/react-auto-scroll.git
+cd react-auto-scroll/demo
+npm i
+npm start
+```
+
+###### [⇡ Top](#table-of-contents)
 
 ## Installation
 
 ```sh
 npm install @brianmcallister/react-auto-scroll
 ```
+
+###### [⇡ Top](#table-of-contents)
+
+## Usage
+
+```js
+import AutoScroll from '@brianmcallister/react-auto-scroll';
+
+const MyComponent = ({ someContent }) => (
+  <AutoScroll>
+    {someContent}
+  </AutoScroll>
+);
+```
+
+###### [⇡ Top](#table-of-contents)
 
 ## API
 
@@ -41,14 +76,4 @@ interface Props {
 }
 ```
 
-#### Example
-
-```js
-import AutoScroll from '@brianmcallister/react-auto-scroll';
-
-const MyComponent = ({ someContent }) => (
-  <AutoScroll>
-    {someContent}
-  </AutoScroll>
-);
-```
+###### [⇡ Top](#table-of-contents)
