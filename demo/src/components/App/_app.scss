@@ -46,6 +46,12 @@
     margin: -50px auto 0;
     max-width: 1200px;
     padding: 0 50px 50px;
+
+    @include mobile {
+      justify-content: flex-start;
+      padding: 70px 15px 15px;
+      width: 100%;
+    }
   }
 
   &__options {
@@ -53,16 +59,33 @@
     display: flex;
     margin-bottom: 50px;
 
+    @include mobile {
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
     label {
       @include type-style-bronx;
 
       color: map-get($colors, barrow);
       user-select: none;
+
+      @include mobile {
+        font-size: 13px;
+        line-height: normal;
+      }
     }
   }
 
   &__option {
     margin: 0 0 0 50px;
+
+    @include mobile {
+      margin: 0;
+      padding: 10px 20px;
+      width: 45%;
+    }
 
     &:first-child {
       margin-left: 0;
@@ -95,6 +118,10 @@
     border-radius: 5px;
     padding: 10px 0;
     width: 70vw;
+
+    @include mobile {
+      width: 100%;
+    }
   }
 
   &__msg {
