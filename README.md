@@ -1,6 +1,6 @@
 # @brianmcallister/react-auto-scroll
 
-[![CircleCI](https://circleci.com/gh/brianmcallister/react-auto-scroll.svg?style=svg)](https://circleci.com/gh/brianmcallister/react-auto-scroll) [![npm version](https://img.shields.io/npm/v/@brianmcallister/react-auto-scroll?label=version&color=%2354C536&logo=npm)](https://www.npmjs.com/package/@brianmcallister/react-auto-scroll)
+[![codecov](https://codecov.io/gh/brianmcallister/react-auto-scroll/branch/master/graph/badge.svg)](https://codecov.io/gh/brianmcallister/react-auto-scroll) [![CircleCI](https://circleci.com/gh/brianmcallister/react-auto-scroll.svg?style=svg)](https://circleci.com/gh/brianmcallister/react-auto-scroll) [![npm version](https://img.shields.io/npm/v/@brianmcallister/react-auto-scroll?label=version&color=%2354C536&logo=npm)](https://www.npmjs.com/package/@brianmcallister/react-auto-scroll)
 
 > Automatically scroll an element to the bottom
 
