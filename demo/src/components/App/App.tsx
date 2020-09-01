@@ -16,6 +16,7 @@ const baseClass = 'app';
  * App component.
  */
 export default () => {
+  const [disableSmoothScroll, setDisableSmoothScroll] = React.useState(false);
   const [preventInteraction, setPreventInteraction] = React.useState(false);
   const [autoScroll, setAutoScroll] = React.useState(true);
   const [optionText, setOptionText] = React.useState('Auto scroll');
@@ -88,6 +89,19 @@ export default () => {
             />
           </div>
 
+          <div className={`${baseClass}__option`}>
+            <Label htmlFor="option">Disable smooth scroll</Label>
+
+            <Switch
+              id="scrollBehavior"
+              onChange={() => setDisableSmoothScroll(!disableSmoothScroll)}
+              checked={disableSmoothScroll}
+              large
+              inline
+              alignIndicator="right"
+            />
+          </div>
+
           <FormGroup className={`${baseClass}__option`} label="Option text">
             <InputGroup
               value={optionText}
@@ -108,6 +122,7 @@ export default () => {
             showOption={autoScroll}
             optionText={optionText}
             height={height}
+            scrollBehavior={disableSmoothScroll ? 'auto' : 'smooth'}
           >
             {messages.map(msg => {
               return (
