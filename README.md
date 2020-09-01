@@ -24,6 +24,9 @@ You can also run the demo locally. To get started:
 git clone git@github.com:brianmcallister/react-auto-scroll.git
 cd react-auto-scroll/demo
 npm i
+# Optionally link libraries for local development
+npm link @brianmcallister/react-auto-scroll
+npm link ../node_modules/react
 npm start
 ```
 
@@ -71,6 +74,8 @@ interface Props {
   optionText?: string;
   // Prevent all mouse interaction with the scroll conatiner.
   preventInteraction?: boolean;
+    // Ability to disable the smooth scrolling behavior.
+  scrollBehavior?: 'smooth' | 'auto';
   // Show the auto scroll option.
   showOption?: boolean;
 }

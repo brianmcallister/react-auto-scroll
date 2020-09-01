@@ -14,6 +14,8 @@ interface Props {
   optionText?: string;
   // Prevent all mouse interaction with the scroll conatiner.
   preventInteraction?: boolean;
+  // Ability to disable the smooth scrolling behavior.
+  scrollBehavior?: 'smooth' | 'auto';
   // Show the auto scroll option.
   showOption?: boolean;
 }
@@ -43,6 +45,7 @@ export default ({
   height,
   optionText = 'Auto scroll',
   preventInteraction = false,
+  scrollBehavior = 'smooth',
   showOption = true,
 }: Props) => {
   const [autoScroll, setAutoScroll] = React.useState(true);
@@ -75,10 +78,10 @@ export default ({
       const { current } = containerElement;
 
       if (current) {
-        current.style.scrollBehavior = 'smooth';
+        current.style.scrollBehavior = scrollBehavior;
       }
     }, 0);
-  }, [containerElement]);
+  }, [containerElement, scrollBehavior]);
 
   // When the children are updated, scroll the container
   // to the bottom.

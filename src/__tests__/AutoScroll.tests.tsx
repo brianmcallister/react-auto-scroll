@@ -86,4 +86,16 @@ describe('<AutoScroll />', () => {
     });
     expect(wrapper.find('.react-auto-scroll__option').length).toBe(0);
   });
+
+  it('should handle the scrollBehavior prop correctly', () => {
+    const wrapper = mount(
+      <AutoScroll scrollBehavior="auto">
+        <p>test</p>
+      </AutoScroll>,
+    );
+
+    expect(wrapper.find('.react-auto-scroll__scroll-container').prop('style')).toMatchObject({
+      scrollBehavior: 'auto',
+    });
+  });
 });
