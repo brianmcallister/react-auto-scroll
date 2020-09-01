@@ -27,7 +27,8 @@
     "types": "tsc --noEmit"
   },
   "peerDependencies": {
-    "react": "^16.8"
+    "react": "^16.8",
+    "react-dom": "^16.8"
   },
   "dependencies": {
     "classnames": "^2"
@@ -59,7 +60,7 @@
     "prettier": "1.19.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "stylelint": "11.1.1",
+    "stylelint": "^13.7.0",
     "stylelint-config-recommended": "3.0.0",
     "stylelint-config-sass-guidelines": "6.1.0",
     "stylelint-scss": "3.12.1",
