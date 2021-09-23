@@ -128,4 +128,4 @@ export default function AutoScroll({
       )}
     </div>
   );
-};
+}
