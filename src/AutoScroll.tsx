@@ -38,7 +38,7 @@ const getRandomString = () =>
 /**
  * AutoScroll component.
  */
-export default ({
+export default function AutoScroll({
   checkBoxId = getRandomString(),
   children,
   className,
@@ -47,7 +47,7 @@ export default ({
   preventInteraction = false,
   scrollBehavior = 'smooth',
   showOption = true,
-}: Props) => {
+}: Props) {
   const [autoScroll, setAutoScroll] = React.useState(true);
   const containerElement = React.useRef<HTMLDivElement>(null);
   const cls = classnames(baseClass, className, {
@@ -128,4 +128,4 @@ export default ({
       )}
     </div>
   );
-};
+}
