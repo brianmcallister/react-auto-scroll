@@ -1,0 +1,47 @@
+on: [push]
+
+jobs:
+  cicd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules-demo
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('demo/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - run: npm ci
+      - run: cd demo && npm ci && cd -
+      - run: npm run lint
+      - run: npm run types
+      - run: |
+          npm run test -- --coverage
+          bash <(curl -s https://codecov.io/bash) -f ./coverage/coverage-final.json
+
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+
+      #- uses: chromaui/action@v1
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      #    exitOnceUploaded: true
