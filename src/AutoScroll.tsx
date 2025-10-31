@@ -2,22 +2,64 @@ import classnames from 'classnames';
 import React from 'react';
 
 interface Props {
-  // ID attribute of the checkbox.
+  /**
+   * ID attribute of the checkbox. Used to associate the input and label elements.
+   */
   checkBoxId?: string;
-  // Children to render in the scroll container.
+
+  /**
+   * React elements to render inside the scrollable container.
+   */
   children: React.ReactNode;
-  // Extra CSS class names.
+
+  /**
+   * Additional CSS class names to apply to the root container.
+   */
   className?: string;
-  // Height value of the scroll container.
+
+  /**
+   * Fixed height (in pixels) of the scrollable container.
+   */
   height?: number;
-  // Text to use for the auto scroll option.
+
+  /**
+   * Label text displayed next to the auto-scroll checkbox option.
+   */
   optionText?: string;
-  // Prevent all mouse interaction with the scroll conatiner.
+
+  /**
+   * If true, disables all mouse and pointer interaction with the scroll container.
+   */
   preventInteraction?: boolean;
-  // Ability to disable the smooth scrolling behavior.
+
+  /**
+   * Defines how scrolling should behave — either instant (`'auto'`) or animated (`'smooth'`).
+   */
   scrollBehavior?: 'smooth' | 'auto';
-  // Show the auto scroll option.
+
+  /**
+   * If true, shows the "Auto scroll" checkbox option below the container.
+   * If false, the parent component must control the auto-scroll behavior via props.
+   */
   showOption?: boolean;
+
+  /**
+   * Current value indicating whether auto-scrolling is enabled.
+   *
+   * - **When `showOption` is `true`**: this prop is optional, as internal state is used.
+   * - **When `showOption` is `false`**: this prop becomes **required**, since the parent must
+   *   fully control the scroll behavior (controlled mode).
+   */
+  autoScroll?: boolean;
+
+  /**
+   * Setter function to update the `autoScroll` state.
+   *
+   * - **When `showOption` is `true`**: optional; internal state management is used.
+   * - **When `showOption` is `false`**: required; used by the component to notify the parent
+   *   when auto-scroll should toggle (e.g., when the user manually scrolls up).
+   */
+  setAutoScroll?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 /**
@@ -36,7 +78,15 @@ const getRandomString = () =>
     .slice(2, 15);
 
 /**
- * AutoScroll component.
+ * AutoScroll component renders a scrollable container that automatically scrolls to the bottom
+ * when new content is added.
+ *
+ * It can work in two modes:
+ *
+ * 1. **Uncontrolled (default)**: Internal state manages auto-scroll. A checkbox UI lets
+ *    users toggle auto-scrolling.
+ * 2. **Controlled**: When `showOption` is `false`, the parent component provides `autoScroll`
+ *    and `setAutoScroll` props to manage behavior externally.
  */
 export default function AutoScroll({
   checkBoxId = getRandomString(),
@@ -47,8 +97,18 @@ export default function AutoScroll({
   preventInteraction = false,
   scrollBehavior = 'smooth',
   showOption = true,
+  autoScroll: parentAutoScroll,
+  setAutoScroll: parentSetAutoScroll,
 }: Props) {
+  const isControlled =
+    typeof parentAutoScroll === 'boolean' && typeof parentSetAutoScroll === 'function';
+
   const [autoScroll, setAutoScroll] = React.useState(true);
+  const effectiveAutoScroll = isControlled ? (parentAutoScroll as boolean) : autoScroll;
+  const setEffectiveAutoScroll = isControlled
+    ? (parentSetAutoScroll as React.Dispatch<React.SetStateAction<boolean>>)
+    : setAutoScroll;
+
   const containerElement = React.useRef<HTMLDivElement>(null);
   const cls = classnames(baseClass, className, {
     [`${baseClass}--empty`]: React.Children.count(children) === 0,
@@ -66,8 +126,8 @@ export default function AutoScroll({
   const onWheel = () => {
     const { current } = containerElement;
 
-    if (current && showOption) {
-      setAutoScroll(current.scrollTop + current.offsetHeight === current.scrollHeight);
+    if (current && (showOption || isControlled)) {
+      setEffectiveAutoScroll(current.scrollTop + current.offsetHeight === current.scrollHeight);
     }
   };
 
@@ -86,7 +146,7 @@ export default function AutoScroll({
   // When the children are updated, scroll the container
   // to the bottom.
   React.useEffect(() => {
-    if (!autoScroll) {
+    if (!effectiveAutoScroll) {
       return;
     }
 
@@ -95,7 +155,7 @@ export default function AutoScroll({
     if (current) {
       current.scrollTop = current.scrollHeight;
     }
-  }, [children, containerElement, autoScroll]);
+  }, [children, containerElement, effectiveAutoScroll]);
 
   return (
     <div className={cls}>
@@ -111,10 +171,10 @@ export default function AutoScroll({
       {showOption && !preventInteraction && (
         <div className={`${baseClass}__option`}>
           <input
-            checked={autoScroll}
+            checked={effectiveAutoScroll}
             className={`${baseClass}__option-input`}
             id={`${baseClass}__option-input-${checkBoxId}`}
-            onChange={() => setAutoScroll(!autoScroll)}
+            onChange={() => setEffectiveAutoScroll(!effectiveAutoScroll)}
             type="checkbox"
           />
 
