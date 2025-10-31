@@ -93,9 +93,42 @@ describe('<AutoScroll />', () => {
         <p>test</p>
       </AutoScroll>,
     );
-
     expect(wrapper.find('.react-auto-scroll__scroll-container').prop('style')).toMatchObject({
       scrollBehavior: 'auto',
     });
+  });
+
+  it('should accept controlled state', () => {
+    const setAutoScroll = jest.fn();
+
+    const wrapper = mount(
+      <AutoScroll showOption={false} autoScroll setAutoScroll={setAutoScroll}>
+        <div>item 1</div>
+      </AutoScroll>,
+    );
+
+    const container = wrapper.find('.react-auto-scroll__scroll-container');
+    const node = container.getDOMNode() as HTMLDivElement;
+
+    Object.defineProperty(node, 'offsetHeight', { value: 100, configurable: true });
+    Object.defineProperty(node, 'scrollHeight', { value: 200, configurable: true });
+    Object.defineProperty(node, 'scrollTop', { value: 0, writable: true, configurable: true });
+
+    // Simulate user scroll
+    container.simulate('wheel');
+    expect(setAutoScroll).toHaveBeenCalled();
+
+    // Verify scroll-to-bottom happens when autoScroll is true
+    wrapper.setProps({
+      children: (
+        <>
+          <div>item 1</div>
+          <div>item 2</div>
+        </>
+      ),
+    });
+    wrapper.update();
+
+    expect(node.scrollTop).toBe(node.scrollHeight);
   });
 });
