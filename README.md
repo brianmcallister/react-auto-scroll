@@ -16,7 +16,7 @@
 
 ## Demo
 
-Hosted demo: [https://react-auto-scroll.netlify.com/](https://react-auto-scroll.netlify.com/)
+Hosted demo: [https://brianmcallister.github.io/react-auto-scroll/](https://brianmcallister.github.io/react-auto-scroll/)
 
 You can also run the demo locally. To get started:
 

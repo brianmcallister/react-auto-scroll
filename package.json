@@ -4,7 +4,7 @@
   "description": "Automatically scroll an element to the bottom",
   "main": "dist/AutoScroll.js",
   "repository": "brianmcallister/react-auto-scroll",
-  "homepage": "https://react-auto-scroll.netlify.com/",
+  "homepage": "https://brianmcallister.github.io/react-auto-scroll/",
   "license": "MIT",
   "author": {
     "name": "Brian Wm. McAllister",
