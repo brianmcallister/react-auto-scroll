@@ -1,8 +1,8 @@
 # @brianmcallister/react-auto-scroll
 
-[![npm version](https://img.shields.io/npm/v/@brianmcallister/react-auto-scroll?label=version&color=%2354C536&logo=npm)](https://www.npmjs.com/package/@brianmcallister/react-auto-scroll)
+[![CI](https://github.com/brianmcallister/react-auto-scroll/actions/workflows/ci.yml/badge.svg)](https://github.com/brianmcallister/react-auto-scroll/actions/workflows/ci.yml) [![npm version](https://img.shields.io/npm/v/@brianmcallister/react-auto-scroll?label=version&color=%2354C536&logo=npm)](https://www.npmjs.com/package/@brianmcallister/react-auto-scroll)
 
-> Automatically scroll an element to the bottom
+> Keep a scroll container scrolled to the bottom, in React
 
 `react-auto-scroll` is a React component that automatically scrolls a containing element to the bottom.
 
@@ -12,7 +12,8 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [API](#api)
-	- [`AutoScroll`](#autoscroll)
+  - [`AutoScroll`](#autoscroll)
+- [Upgrading from 1.x](#upgrading-from-1x)
 
 ## Demo
 
@@ -24,9 +25,6 @@ You can also run the demo locally. To get started:
 git clone git@github.com:brianmcallister/react-auto-scroll.git
 cd react-auto-scroll/demo
 npm i
-# Optionally link libraries for local development
-npm link @brianmcallister/react-auto-scroll
-npm link ../node_modules/react
 npm start
 ```
 
@@ -42,15 +40,23 @@ npm install @brianmcallister/react-auto-scroll
 
 ## Usage
 
-```js
+```jsx
 import AutoScroll from '@brianmcallister/react-auto-scroll';
 
-const MyComponent = ({ someContent }) => (
-  <AutoScroll>
-    {someContent}
+const ChatLog = ({ messages }) => (
+  <AutoScroll height={400}>
+    {messages.map((message) => (
+      <p key={message.id}>{message.text}</p>
+    ))}
   </AutoScroll>
 );
 ```
+
+`AutoScroll` keeps its container scrolled to the bottom as the content changes. It also notices content that changes without a React render, like text appended by another script.
+
+When the auto scroll option is shown, scrolling up pauses auto scrolling and unchecks the option, so people can read earlier content. Scrolling back to the bottom, or checking the option, resumes it. This works with the mouse wheel, the keyboard, touch and the scrollbar, even while content is arriving quickly.
+
+Works with React 18 and later, including server rendering.
 
 ###### [⇡ Top](#table-of-contents)
 
@@ -58,27 +64,41 @@ const MyComponent = ({ someContent }) => (
 
 ### `AutoScroll`
 
-This is the default export. Use this React component to scroll a container to the bottom when the children change.
+The default export, also available as a named export.
 
-```js
-interface Props {
-  // ID attribute of the checkbox.
+```ts
+interface AutoScrollProps {
+  // ID for the auto scroll checkbox. Defaults to a generated ID.
   checkBoxId?: string;
-  // Children to render in the scroll container.
-  children: React.ReactNode;
+  // Content to render in the scroll container.
+  children?: React.ReactNode;
   // Extra CSS class names.
   className?: string;
-  // Height value of the scroll container.
+  // Height of the scroll container, in pixels.
   height?: number;
-  // Text to use for the auto scroll option.
+  // Label for the auto scroll checkbox. Defaults to 'Auto scroll'.
   optionText?: string;
-  // Prevent all mouse interaction with the scroll conatiner.
+  // Prevent all mouse interaction with the scroll container. Defaults to false.
   preventInteraction?: boolean;
-    // Ability to disable the smooth scrolling behavior.
+  // How to scroll to new content. Defaults to 'smooth'. The first scroll is always instant.
   scrollBehavior?: 'smooth' | 'auto';
-  // Show the auto scroll option.
+  // Show the auto scroll checkbox. Defaults to true. Without it, scrolling up doesn't pause.
   showOption?: boolean;
 }
 ```
+
+The markup uses BEM classes you can style: `react-auto-scroll`, `react-auto-scroll__scroll-container`, `react-auto-scroll__option`, `react-auto-scroll__option-input` and `react-auto-scroll__option-text`, plus the modifiers `--empty`, `--prevent-interaction` and `--showOption`.
+
+###### [⇡ Top](#table-of-contents)
+
+## Upgrading from 1.x
+
+The props and markup are the same. What changed:
+
+- React is a peer dependency of version 18 or later, because the component uses `useId`. Version 1 supported React 16.8.
+- Scrolling up with the keyboard, touch or scrollbar now pauses auto scrolling, not only the mouse wheel.
+- The package has an `exports` map, so deep imports from `dist/` no longer work.
+
+See the [changelog](CHANGELOG.md) for everything else.
 
 ###### [⇡ Top](#table-of-contents)

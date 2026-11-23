@@ -1,4 +1,9 @@
-@import '../../styles/base';
+@use "sass:color";
+@use "sass:map";
+@use '../../styles/base';
+@use "../../styles/mixins/responsive";
+@use "../../styles/mixins/typography";
+@use "../../styles/variables/colors";
 
 .app {
   align-items: stretch;
@@ -7,7 +12,7 @@
   height: 100vh;
 
   &__header {
-    @include type-style-manhattan;
+    @include typography.type-style-manhattan;
 
     align-items: center;
     display: flex;
@@ -20,14 +25,14 @@
   }
 
   &__header-link {
-    color: map-get($colors, allen);
+    color: map.get(colors.$colors, allen);
     margin-left: 10px;
     text-decoration: none;
   }
 
   &__header-links {
     a {
-      color: map-get($colors, allen);
+      color: map.get(colors.$colors, allen);
       margin-left: 10px;
       text-decoration: none;
 
@@ -47,7 +52,7 @@
     max-width: 1200px;
     padding: 0 50px 50px;
 
-    @include mobile {
+    @include responsive.mobile {
       justify-content: flex-start;
       padding: 70px 15px 15px;
       width: 100%;
@@ -59,19 +64,19 @@
     display: flex;
     margin-bottom: 50px;
 
-    @include mobile {
+    @include responsive.mobile {
       flex-wrap: wrap;
       margin-bottom: 20px;
       width: 100%;
     }
 
     label {
-      @include type-style-bronx;
+      @include typography.type-style-bronx;
 
-      color: map-get($colors, barrow);
+      color: map.get(colors.$colors, barrow);
       user-select: none;
 
-      @include mobile {
+      @include responsive.mobile {
         font-size: 13px;
         line-height: normal;
       }
@@ -81,7 +86,7 @@
   &__option {
     margin: 0 0 0 50px;
 
-    @include mobile {
+    @include responsive.mobile {
       margin: 0;
       padding: 10px 20px;
       width: 45%;
@@ -91,26 +96,64 @@
       margin-left: 0;
     }
 
-    .bp3-switch {
-      margin: 0 !important;
-      padding: 0 !important;
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__switch {
+    appearance: none;
+    background: map.get(colors.$colors, allen);
+    border-radius: 999px;
+    cursor: pointer;
+    height: 20px;
+    margin: 0;
+    position: relative;
+    transition: background 0.15s;
+    width: 36px;
+
+    &::after {
+      background: #fff;
+      border-radius: 50%;
+      content: '';
+      height: 16px;
+      left: 2px;
+      position: absolute;
+      top: 2px;
+      transition: transform 0.15s;
+      width: 16px;
     }
 
-    .bp3-control-indicator {
-      margin: 0 !important;
+    &:checked {
+      background: #137cbd;
     }
 
-    .bp3-input-group {
-      margin-top: 3px;
+    &:checked::after {
+      transform: translateX(16px);
     }
+  }
 
-    .bp3-slider {
-      margin-top: 2px;
+  &__switch,
+  &__text,
+  &__range {
+    &:focus-visible {
+      outline: 2px solid #48aff0;
+      outline-offset: 2px;
     }
+  }
 
-    .bp3-slider-axis {
-      display: none;
-    }
+  &__text {
+    border: 0;
+    border-radius: 3px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    padding: 5px 8px;
+  }
+
+  &__range {
+    accent-color: #137cbd;
+    width: 150px;
   }
 
   &__msg-container {
@@ -119,20 +162,20 @@
     padding: 10px 0;
     width: 70vw;
 
-    @include mobile {
+    @include responsive.mobile {
       width: 100%;
     }
   }
 
   &__msg {
-    color: map-get($colors, beach);
+    color: map.get(colors.$colors, beach);
     cursor: default;
     font-family: monospace;
     padding: 5px 12px;
     white-space: nowrap;
 
     &:hover {
-      background-color: lighten(#1d1f21, 2%);
+      background-color: color.adjust(#1d1f21, $lightness: 2%);
     }
   }
 
@@ -142,9 +185,9 @@
     }
 
     &__option {
-      @include type-style-manhattan;
+      @include typography.type-style-manhattan;
 
-      color: map-get($colors, barrow);
+      color: map.get(colors.$colors, barrow);
       cursor: pointer;
       display: inline-block;
       padding: 12px 10px 0;

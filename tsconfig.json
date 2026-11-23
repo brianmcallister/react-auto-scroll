@@ -1,18 +1,16 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "esModuleInterop": true,
-    "inlineSourceMap": true,
-    "jsx": "react",
-    "lib": ["es2017", "dom"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "outDir": "dist",
-    "pretty": true,
-    "rootDir": "src",
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
     "strict": true,
-    "target": "es2017"
+    "noUncheckedIndexedAccess": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "noEmit": true
   },
-  "include": ["src/"],
-  "exclude": ["src/__tests__/**"]
+  "include": ["src", "*.config.ts"]
 }

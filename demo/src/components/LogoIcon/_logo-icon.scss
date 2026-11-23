@@ -1,7 +1,9 @@
-@import '../../styles/base';
+@use "sass:map";
+@use '../../styles/base';
+@use "../../styles/variables/colors";
 
 .logo-icon {
   path {
-    fill: map-get($colors, allen);
+    fill: map.get(colors.$colors, allen);
   }
 }

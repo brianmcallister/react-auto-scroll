@@ -1,70 +1,80 @@
 {
   "name": "@brianmcallister/react-auto-scroll",
-  "version": "1.1.0",
-  "description": "Automatically scroll an element to the bottom",
-  "main": "dist/AutoScroll.js",
-  "repository": "brianmcallister/react-auto-scroll",
+  "version": "2.0.0",
+  "description": "React component that keeps a scroll container scrolled to the bottom",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianmcallister/react-auto-scroll.git"
+  },
   "homepage": "https://brianmcallister.github.io/react-auto-scroll/",
+  "bugs": "https://github.com/brianmcallister/react-auto-scroll/issues",
   "license": "MIT",
   "author": {
     "name": "Brian Wm. McAllister",
     "email": "brian@brianmcallister.com",
     "url": "https://www.brianmcallister.com"
   },
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
-    "dist/**/*"
+    "dist"
   ],
   "keywords": [
     "autoscroll",
+    "auto-scroll",
     "scroll",
-    "react"
+    "chat",
+    "log",
+    "react",
+    "react-component"
   ],
   "scripts": {
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore ./src ./demo",
-    "prepare": "tsc",
-    "stylelint": "stylelint demo/**/*.scss",
-    "test": "jest --coverage",
-    "types": "tsc --noEmit"
+    "build": "tsup",
+    "format": "prettier --write .",
+    "lint": "eslint . && prettier --check .",
+    "lint:package": "publint",
+    "prepack": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "react": "^16.8",
-    "react-dom": "^16.8"
-  },
-  "dependencies": {
-    "classnames": "^2"
+    "react": ">=18"
   },
   "devDependencies": {
-    "@types/classnames": "2.2.9",
-    "@types/enzyme": "3.10.3",
-    "@types/jest": "24.0.23",
-    "@types/react": "16.9.13",
-    "@typescript-eslint/eslint-plugin": "2.6.1",
-    "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.15.1",
-    "eslint": "6.6.0",
-    "eslint-config-airbnb": "18.0.1",
-    "eslint-config-airbnb-typescript": "6.1.0",
-    "eslint-config-prettier": "6.5.0",
-    "eslint-plugin-eslint-comments": "3.1.2",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jest": "23.0.3",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-prettier": "3.1.1",
-    "eslint-plugin-promise": "4.2.1",
-    "eslint-plugin-react": "7.16.0",
-    "eslint-plugin-react-hooks": "1.7.0",
-    "eslint-plugin-unicorn": "12.1.0",
-    "jest": "^25.2.7",
-    "jest-environment-enzyme": "7.1.2",
-    "jest-enzyme": "7.1.2",
-    "prettier": "1.19.1",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "stylelint": "^13.7.0",
-    "stylelint-config-recommended": "3.0.0",
-    "stylelint-config-sass-guidelines": "6.1.0",
-    "stylelint-scss": "3.12.1",
-    "ts-jest": "^25.3.1",
-    "typescript": "3.7.2"
+    "@eslint/js": "10.0.1",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/react": "16.3.3",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitest/coverage-v8": "5.1.0",
+    "eslint": "10.14.0",
+    "eslint-config-prettier": "10.1.8",
+    "globals": "17.14.0",
+    "jsdom": "31.0.0",
+    "prettier": "3.9.10",
+    "publint": "0.3.15",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "tsup": "9.0.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.1",
+    "vitest": "5.1.0"
   }
 }
