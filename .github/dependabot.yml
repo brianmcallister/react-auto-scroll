@@ -7,6 +7,11 @@ updates:
     groups:
       dev-dependencies:
         dependency-type: development
+    ignore:
+      # typescript-eslint only supports TypeScript below 6.1, so a TypeScript major would fail lint.
+      # Update it by hand once typescript-eslint supports the new version.
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: github-actions
     directory: /
