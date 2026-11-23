@@ -63,18 +63,18 @@
     "@testing-library/react": "16.3.3",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
-    "@vitest/coverage-v8": "5.1.0",
-    "eslint": "10.14.0",
+    "@vitest/coverage-v8": "5.1.1",
+    "eslint": "10.15.0",
     "eslint-config-prettier": "10.1.8",
     "globals": "17.14.0",
-    "jsdom": "31.0.0",
-    "prettier": "3.9.10",
-    "publint": "0.3.15",
+    "jsdom": "31.0.1",
+    "prettier": "3.10.1",
+    "publint": "0.3.25",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "tsup": "9.0.0",
-    "typescript": "6.0.3",
-    "typescript-eslint": "8.72.1",
-    "vitest": "5.1.0"
+    "typescript": "7.0.2",
+    "typescript-eslint": "8.73.0",
+    "vitest": "5.1.1"
   }
 }
