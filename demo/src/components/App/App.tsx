@@ -1,50 +1,82 @@
 import AutoScroll from '@brianmcallister/react-auto-scroll';
-import faker from 'faker';
-import React from 'react';
-import { Label, FocusStyleManager, Switch, Slider, InputGroup, FormGroup } from '@blueprintjs/core';
+import { useEffect, useId, useState } from 'react';
 
+import { logLine } from '../../fake';
 import LogoIcon from '../LogoIcon';
 
 import './_app.scss';
 
-FocusStyleManager.onlyShowFocusOnTabs();
-
 const DEFAULT_HEIGHT = 300;
+const MAX_MESSAGES = 200;
 const baseClass = 'app';
+
+interface Message {
+  id: number;
+  text: string;
+}
+
+let nextId = 0;
+
+/**
+ * A labeled checkbox styled as a switch.
+ */
+const Toggle = ({
+  checked,
+  label,
+  onChange,
+}: {
+  checked: boolean;
+  label: string;
+  onChange: (checked: boolean) => void;
+}) => {
+  const id = useId();
+
+  return (
+    <div className={`${baseClass}__option`}>
+      <label htmlFor={id}>{label}</label>
+      <input
+        checked={checked}
+        className={`${baseClass}__switch`}
+        id={id}
+        onChange={(event) => {
+          onChange(event.target.checked);
+        }}
+        role="switch"
+        type="checkbox"
+      />
+    </div>
+  );
+};
 
 /**
  * App component.
  */
-export default () => {
-  const [disableSmoothScroll, setDisableSmoothScroll] = React.useState(false);
-  const [preventInteraction, setPreventInteraction] = React.useState(false);
-  const [autoScroll, setAutoScroll] = React.useState(true);
-  const [optionText, setOptionText] = React.useState('Auto scroll');
-  const [height, setHeight] = React.useState(DEFAULT_HEIGHT);
-  const [messages, setMessages] = React.useState<string[]>([]);
+const App = () => {
+  const [smoothScroll, setSmoothScroll] = useState(true);
+  const [preventInteraction, setPreventInteraction] = useState(false);
+  const [showOption, setShowOption] = useState(true);
+  const [optionText, setOptionText] = useState('Auto scroll');
+  const [height, setHeight] = useState(DEFAULT_HEIGHT);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const textId = useId();
+  const heightId = useId();
 
-  React.useEffect(() => {
+  // Add a log line every so often, keeping the most recent ones.
+  useEffect(() => {
     const interval = setInterval(() => {
       if (Math.random() > 0.5) {
         return;
       }
 
-      const msg = [
-        faker.internet.protocol(),
-        `/${faker.system.commonFileType()}/${faker.system.commonFileName(
-          faker.system.commonFileExt(),
-        )}`,
-        faker.random.number(),
-        faker.system.mimeType(),
-        faker.system.semver(),
-        faker.random.locale(),
-      ];
-
-      setMessages(messages.concat([msg.join(' ')]));
+      setMessages((current) =>
+        current.concat({ id: nextId++, text: logLine() }).slice(-MAX_MESSAGES),
+      );
     }, 100);
 
-    return () => clearInterval(interval);
-  }, [messages]);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <div className={baseClass}>
@@ -63,77 +95,66 @@ export default () => {
 
       <div className={`${baseClass}__content`}>
         <div className={`${baseClass}__options`}>
-          <div className={`${baseClass}__option`}>
-            <Label htmlFor="prevent">Prevent interaction</Label>
-
-            <Switch
-              id="prevent"
-              onChange={() => setPreventInteraction(!preventInteraction)}
-              checked={preventInteraction}
-              large
-              inline
-              alignIndicator="right"
-            />
-          </div>
-
-          <div className={`${baseClass}__option`}>
-            <Label htmlFor="option">Show auto scroll option</Label>
-
-            <Switch
-              id="option"
-              onChange={() => setAutoScroll(!autoScroll)}
-              checked={autoScroll}
-              large
-              inline
-              alignIndicator="right"
-            />
-          </div>
+          <Toggle
+            checked={preventInteraction}
+            label="Prevent interaction"
+            onChange={setPreventInteraction}
+          />
+          <Toggle checked={showOption} label="Show auto scroll option" onChange={setShowOption} />
+          <Toggle
+            checked={!smoothScroll}
+            label="Disable smooth scroll"
+            onChange={(checked) => {
+              setSmoothScroll(!checked);
+            }}
+          />
 
           <div className={`${baseClass}__option`}>
-            <Label htmlFor="option">Disable smooth scroll</Label>
-
-            <Switch
-              id="scrollBehavior"
-              onChange={() => setDisableSmoothScroll(!disableSmoothScroll)}
-              checked={disableSmoothScroll}
-              large
-              inline
-              alignIndicator="right"
-            />
-          </div>
-
-          <FormGroup className={`${baseClass}__option`} label="Option text">
-            <InputGroup
+            <label htmlFor={textId}>Option text</label>
+            <input
+              className={`${baseClass}__text`}
+              id={textId}
+              onChange={(event) => {
+                setOptionText(event.target.value);
+              }}
               value={optionText}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setOptionText(event.currentTarget.value)
-              }
             />
-          </FormGroup>
+          </div>
 
-          <FormGroup className={`${baseClass}__option`} label="Height">
-            <Slider onChange={setHeight} min={250} max={400} value={height} />
-          </FormGroup>
+          <div className={`${baseClass}__option`}>
+            <label htmlFor={heightId}>Height: {height}px</label>
+            <input
+              className={`${baseClass}__range`}
+              id={heightId}
+              max={400}
+              min={250}
+              onChange={(event) => {
+                setHeight(Number(event.target.value));
+              }}
+              type="range"
+              value={height}
+            />
+          </div>
         </div>
 
         <div className={`${baseClass}__msg-container`}>
           <AutoScroll
-            preventInteraction={preventInteraction}
-            showOption={autoScroll}
-            optionText={optionText}
             height={height}
-            scrollBehavior={disableSmoothScroll ? 'auto' : 'smooth'}
+            optionText={optionText}
+            preventInteraction={preventInteraction}
+            scrollBehavior={smoothScroll ? 'smooth' : 'auto'}
+            showOption={showOption}
           >
-            {messages.map(msg => {
-              return (
-                <div key={msg} className={`${baseClass}__msg`}>
-                  {msg}
-                </div>
-              );
-            })}
+            {messages.map((message) => (
+              <div key={message.id} className={`${baseClass}__msg`}>
+                {message.text}
+              </div>
+            ))}
           </AutoScroll>
         </div>
       </div>
     </div>
   );
 };
+
+export default App;
