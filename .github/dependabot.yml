@@ -1,4 +1,7 @@
 version: 2
+
+# Each group only takes patch and minor updates, which the auto-merge workflow merges once CI
+# passes. Major updates come as their own pull requests, for a person to review.
 updates:
   - package-ecosystem: npm
     directory: /
@@ -7,6 +10,7 @@ updates:
     groups:
       dev-dependencies:
         dependency-type: development
+        update-types: ['minor', 'patch']
     ignore:
       # typescript-eslint only supports TypeScript below 6.1, so a TypeScript major would fail lint.
       # Update it by hand once typescript-eslint supports the new version.
@@ -20,6 +24,7 @@ updates:
     groups:
       actions:
         patterns: ['*']
+        update-types: ['minor', 'patch']
 
   - package-ecosystem: npm
     directory: /demo
@@ -28,3 +33,4 @@ updates:
     groups:
       demo:
         patterns: ['*']
+        update-types: ['minor', 'patch']
