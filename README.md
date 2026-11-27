@@ -1,4 +1,9 @@
-# @brianmcallister/react-auto-scroll
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/brianmcallister/react-auto-scroll/main/.github/assets/logo-dark.svg">
+    <img alt="@brianmcallister/react-auto-scroll" src="https://raw.githubusercontent.com/brianmcallister/react-auto-scroll/main/.github/assets/logo-light.svg" height="48">
+  </picture>
+</h1>
 
 [![CI](https://github.com/brianmcallister/react-auto-scroll/actions/workflows/ci.yml/badge.svg)](https://github.com/brianmcallister/react-auto-scroll/actions/workflows/ci.yml) [![npm version](https://img.shields.io/npm/v/@brianmcallister/react-auto-scroll?label=version&color=%2354C536&logo=npm)](https://www.npmjs.com/package/@brianmcallister/react-auto-scroll)
 
